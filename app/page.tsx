@@ -16,7 +16,7 @@ export default async function Home(props: {
     <>
       <Header />
       <main className="flex flex-col items-center p-4 gap-8">
-        <Search placeholder="Search City..." />
+        <Search placeholder="Enter the name of the city here" />
         <Suspense fallback={<Skeleton className='w-[343px] h-[331px] rounded-xl' />}>
           <CitiesList query={query} />
         </Suspense>
