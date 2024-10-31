@@ -1,6 +1,6 @@
 import { getCities } from "@/app/actions";
 import CityItem from "./city-item";
-import SearchBanner from "./search-banner";
+import SearchBanner from "../common/search-banner";
 import NotifyBanner from "../common/notify-banner";
 
 interface Props {
