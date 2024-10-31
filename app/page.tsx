@@ -1,7 +1,8 @@
-import { ModeToggle } from '@/components/common/mode-toggle';
-import Image from 'next/image';
-import Logo from '@/public/images/logo.png';
 import Search from '@/components/common/search';
+import CitiesList from '@/components/home/cities-list';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import Header from '@/components/home/header';
 
 export default async function Home(props: {
   searchParams?: Promise<{
@@ -14,15 +15,13 @@ export default async function Home(props: {
   return (
     <>
       <header className="flex items-center justify-between p-4">
-        <section className="flex items-center gap-4">
-          <Image src={Logo} alt="logo" className="h-8 w-auto" />
-          <h1 className="text-2xl font-bold">Weather Pulse</h1>
-        </section>
-        <ModeToggle />
+        <Header />
       </header>
       <main className="flex flex-col items-center p-4 gap-8">
         <Search placeholder="Search City..." />
-        <p>query: {query}</p>
+        <Suspense fallback={<Skeleton className='w-[343px] h-[331px] rounded-md' />}>
+          <CitiesList query={query} />
+        </Suspense>
       </main>
     </>
   );
