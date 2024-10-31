@@ -4,29 +4,38 @@ import { City } from '@/models/city';
 import { Forecast } from '@/models/forecast';
 import { Weather } from '@/models/weather';
 
+type ApiResponse<T> = T | null;
+
+async function fetchData<T>(url: string): Promise<ApiResponse<T>> {
+  const apiKey = process.env.API_KEY;
+  const urlToFetch = `${url}&appid=${apiKey}`;
+
+  try {
+    const response = await fetch(urlToFetch);
+
+    if (!response.ok) {
+      console.error(`Error: ${response.status}`);
+      return null;
+    }
+
+    const data: T = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error on fetchData function:`, error);
+    return null;
+  }
+}
+
 export async function getCities(query: string): Promise<City[]> {
   if (!query) {
     return [];
   }
 
-  const apiKey = process.env.API_KEY;
-  const limit = 5;
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=${limit}&appid=${apiKey}`;
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5`;
 
-  try {
-    const response = await fetch(url);
+  const cities = await fetchData<City[]>(url);
 
-    if (!response.ok) {
-      console.error(`Error: ${response.status}`);
-      return [];
-    }
-
-    const data: City[] = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching city coordinates:', error);
-    return [];
-  }
+  return cities || [];
 }
 
 export async function getCity(
@@ -35,57 +44,29 @@ export async function getCity(
 ): Promise<City | undefined> {
   const cities = await getCities(query);
 
-  if (!cities || cities.length === 0) {
-    return undefined;
-  }
+  return cities.find((city) => city.country === country);
+}
 
-  const city = cities.find((value) => value.country === country);
+async function fetchWeatherData<T>(
+  endpoint: string,
+  lat: number,
+  lon: number
+): Promise<ApiResponse<T>> {
+  const url = `https://api.openweathermap.org/data/2.5/${endpoint}?lat=${lat}&lon=${lon}&units=metric`;
 
-  return city;
+  return fetchData<T>(url);
 }
 
 export async function getWeather(
   lat: number,
   lon: number
 ): Promise<Weather | null> {
-  const apiKey = process.env.API_KEY;
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      console.error(`Error: ${response.status}`);
-      return null;
-    }
-
-    const data: Weather = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching weather details:', error);
-    return null;
-  }
+  return fetchWeatherData<Weather>('weather', lat, lon);
 }
 
 export async function getForecast(
   lat: number,
   lon: number
 ): Promise<Forecast | null> {
-  const apiKey = process.env.API_KEY;
-  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      console.error(`Error: ${response.status}`);
-      return null;
-    }
-
-    const data: Forecast = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching weather details:', error);
-    return null;
-  }
+  return fetchWeatherData<Forecast>('forecast', lat, lon);
 }
