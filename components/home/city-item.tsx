@@ -46,7 +46,7 @@ export default async function CityItem({ city }: Props) {
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={`/details/${city.lat}/${city.lon}`}>Ver Detalles</Link>
+          <Link href={`/details/${city.name}/${city.country}`}>Ver Detalles</Link>
         </Button>
       </CardFooter>
     </Card>
