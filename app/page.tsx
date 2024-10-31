@@ -2,7 +2,7 @@ import Search from '@/components/common/search';
 import CitiesList from '@/components/home/cities-list';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import Header from '@/components/home/header';
+import Header from '@/components/common/header';
 
 export default async function Home(props: {
   searchParams?: Promise<{
@@ -14,12 +14,10 @@ export default async function Home(props: {
 
   return (
     <>
-      <header className="flex items-center justify-between p-4">
-        <Header />
-      </header>
+      <Header />
       <main className="flex flex-col items-center p-4 gap-8">
         <Search placeholder="Search City..." />
-        <Suspense fallback={<Skeleton className='w-[343px] h-[331px] rounded-md' />}>
+        <Suspense fallback={<Skeleton className='w-[343px] h-[331px] rounded-xl' />}>
           <CitiesList query={query} />
         </Suspense>
       </main>
