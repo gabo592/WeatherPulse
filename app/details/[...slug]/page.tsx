@@ -1,11 +1,11 @@
 import { getCity, getForecast, getWeather } from "@/app/actions";
 import { ModeToggle } from "@/components/common/mode-toggle";
 import ReturnButton from "@/components/common/return-button";
-import CurrentWeatherCard from "@/components/details/current-weather-card";
-import ForecastCards from "@/components/details/forecast-cards";
-import { Skeleton } from "@/components/ui/skeleton";
+import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
+
+const CurrentWeatherCard = dynamic(() => import('@/components/details/current-weather-card'));
+const ForecastCards = dynamic(() => import('@/components/details/forecast-cards'));
 
 export default async function DetailsPage({
   params,
@@ -35,13 +35,9 @@ export default async function DetailsPage({
         <ModeToggle />
       </section>
       <main className="flex flex-col items-center space-y-6 p-4">
-        <Suspense fallback={<Skeleton className="w-[343px] max-w-4xl h-[387px] lg:h-[251px] rounded-xl" />}>
-          <CurrentWeatherCard city={city} weather={weather} />
-        </Suspense>
+        <CurrentWeatherCard city={city} weather={weather} />
         <h2 className="text-xl font-bold">Forecast</h2>
-        <Suspense fallback={<Skeleton className="w-[343px] max-w-4xl h-[387px] lg:h-[251px] rounded-xl" />}>
-          <ForecastCards forecast={forecast} />
-        </Suspense>
+        <ForecastCards forecast={forecast} />
       </main>
     </>
   );
