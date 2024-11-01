@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WeatherApp
 
-## Getting Started
+WeatherApp is a simple weather application built with Next.js and React that allows users to check the current weather of any city around the world. Using the OpenWeatherMap API, it displays essential information like temperature, humidity, and a brief weather description, with a user-friendly interface.
 
-First, run the development server:
+## Features
+
+- City-Based Weather Search: Allows users to input a city name and retrieve current weather details.
+- Clear User Interface:
+  - FInput field for city name.
+  - Search button to fetch weather data.
+  - Display section for weather information, including:
+    - Current temperature
+    - Humidity
+    - Brief weather description (e.g., "sunny", "cloudy").
+- Error Handling: Provides appropriate feedback when an invalid city is entered or an error occurs in the request.
+- Unit Tests: Ensures stable performance of core functionalities.
+
+## Tech Stack
+
+**Next.js**: 15.0.2
+
+**React**: 19.0.0-rc-02c0e824-20241028
+
+**API**: OpenWeatherMap
+
+## Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/gabo592/WeatherPulse
+  cd WeatherPulse
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Clone the repository:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Create a .env.local file in the root directory and add your OpenWeatherMap API key:
 
-## Learn More
+```bash
+  API_KEY=your_api_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Create a .env.local file in the root directory and add your OpenWeatherMap API key:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  API_KEY=your_api_key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Start the development server:
 
-## Deploy on Vercel
+```bash
+  pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app will be available at http://localhost:3000.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
