@@ -3,7 +3,8 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input } from "../ui/input";
 import { useDebouncedCallback } from 'use-debounce';
-import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { SearchIcon } from "lucide-react";
 
 interface Props {
   placeholder?: string
@@ -12,7 +13,7 @@ interface Props {
 export default function Search({ placeholder = 'Search...' }: Props) {
   const searchParams = useSearchParams();
   const pathName = usePathname();
-  const { replace } = useRouter();
+  const { replace, refresh } = useRouter();
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -24,11 +25,10 @@ export default function Search({ placeholder = 'Search...' }: Props) {
     }
 
     replace(`${pathName}?${params.toString()}`)
-  }, 500);
+  }, 300);
 
   return (
-    <section className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="search">Search</Label>
+    <section className="flex items-center gap-4 w-full max-w-md">
       <Input
         id="search"
         name="search"
@@ -38,6 +38,10 @@ export default function Search({ placeholder = 'Search...' }: Props) {
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get('query')?.toString()}
       />
+      <Button onClick={() => refresh()}>
+        Search
+        <SearchIcon />
+      </Button>
     </section>
   )
 }

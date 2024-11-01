@@ -13,7 +13,10 @@ export default async function ForecastCards({ forecast }: Props) {
         <Card key={index} className="">
           <CardContent className="p-4">
             <div className="text-center">
-              <p className="font-semibold">{new Date(item.dt * 1000).toLocaleDateString('es-ES', { weekday: 'short' })}</p>
+              <p className="font-semibold">
+                {`${new Date(item.dt * 1000).toLocaleDateString('en-US', { weekday: 'short' })}, ${new Date(item.dt * 1000).toLocaleDateString()}`}
+              </p>
+              <p className="font-semibold">{new Date(item.dt * 1000).toLocaleTimeString('en-US', { timeStyle: 'short' })}</p>
               <div className="my-2">
                 {getWeatherIcon(item.weather[0].main)}
               </div>
