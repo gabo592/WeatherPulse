@@ -27,9 +27,9 @@ export default async function CityItem({ city }: Props) {
         <section className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Thermometer className="h-5 w-5 text-red-500" />
-            <span>Temperatura: {weather.main.temp.toFixed(1)}°C</span>
+            <span>Temperature: {weather.main.temp.toFixed(1)}°C</span>
           </div>
-          <span>Sensación térmica: {weather.main.feels_like.toFixed(1)}°C</span>
+          <span>Thermal sensation: {weather.main.feels_like.toFixed(1)}°C</span>
         </section>
         <section className="flex items-center space-x-2">
           {getWeatherIcon(weather.weather[0].main)}
@@ -37,16 +37,16 @@ export default async function CityItem({ city }: Props) {
         </section>
         <section className="flex items-center space-x-2">
           <Droplets className="h-5 w-5 text-blue-500" />
-          <span>Humedad: {weather.main.humidity}%</span>
+          <span>Moisture: {weather.main.humidity}%</span>
         </section>
         <section className="flex items-center space-x-2">
           <Wind className="h-5 w-5 text-teal-500" />
-          <span>Viento: {weather.wind.speed.toFixed(1)} m/s, {weather.wind.deg}°</span>
+          <span>Wind: {weather.wind.speed.toFixed(1)} m/s, {weather.wind.deg}°</span>
         </section>
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={`/details/${city.name}/${city.country}`}>Ver Detalles</Link>
+          <Link href={`/details/${city.name}/${city.country}`}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>

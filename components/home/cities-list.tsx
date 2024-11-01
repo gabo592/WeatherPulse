@@ -25,8 +25,8 @@ export default async function CitiesList({ query }: Props) {
   return (
     <>
       <section className="grid lg:grid-cols-2 xl:grid-cols-4 gap-4">
-        {cities.map((city) => (
-          <CityItem key={city.country} city={city} />
+        {cities.map((city, index) => (
+          <CityItem key={`item-${index}`} city={city} />
         ))}
       </section>
     </>
