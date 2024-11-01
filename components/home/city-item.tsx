@@ -18,7 +18,7 @@ export default async function CityItem({ city }: Props) {
   }
 
   return (
-    <Card className="mb-4">
+    <Card className="flex flex-col justify-between">
       <CardHeader>
         <CardTitle className="text-lg">{city.name}, {city.country}</CardTitle>
         <CardDescription>{city.state}</CardDescription>
