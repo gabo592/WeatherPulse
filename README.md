@@ -1,6 +1,6 @@
-# WeatherApp
+# Weather Pulse ☀️
 
-WeatherApp is a simple weather application built with Next.js and React that allows users to check the current weather of any city around the world. Using the OpenWeatherMap API, it displays essential information like temperature, humidity, and a brief weather description, with a user-friendly interface.
+Weather Pulse is a simple weather application built with Next.js and React that allows users to check the current weather of any city around the world. Using the OpenWeatherMap API, it displays essential information like temperature, humidity, and a brief weather description, with a user-friendly interface.
 
 ## Features
 
@@ -32,7 +32,7 @@ WeatherApp is a simple weather application built with Next.js and React that all
   cd WeatherPulse
 ```
 
-2. Clone the repository:
+2. Install dependencies:
 
 ```bash
   pnpm install
@@ -44,13 +44,7 @@ WeatherApp is a simple weather application built with Next.js and React that all
   API_KEY=your_api_key
 ```
 
-4. Create a .env.local file in the root directory and add your OpenWeatherMap API key:
-
-```bash
-  API_KEY=your_api_key
-```
-
-5. Start the development server:
+4. Start the development server:
 
 ```bash
   pnpm dev
